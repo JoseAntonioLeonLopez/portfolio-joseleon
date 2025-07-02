@@ -1,0 +1,143 @@
+---
+import JavaScript from '../components/icons/JavaScript.astro';
+import Python from '../components/icons/Python.astro';
+import Java from '../components/icons/Java.astro';
+import PHP from '../components/icons/PHP.astro';
+
+import React from '../components/icons/React.astro';
+import Vue from '../components/icons/Vue.astro';
+import Angular from '../components/icons/Angular.astro';
+
+import Express from '../components/icons/Express.astro';
+import Spring from '../components/icons/Spring.astro';
+import FastAPI from '../components/icons/FastAPI.astro';
+
+import MySQL from '../components/icons/MySQL.astro';
+import PostgreSQL from '../components/icons/PostgreSQL.astro';
+import MongoDB from '../components/icons/MongoDB.astro';
+import MariaDB from '../components/icons/MariaDB.astro';
+
+import Docker from '../components/icons/Docker.astro';
+import GoogleCloud from '../components/icons/GoogleCloud.astro';
+
+import Tailwind from '../components/icons/Tailwind.astro';
+import Bootstrap from '../components/icons/Bootstrap.astro';
+
+import Vite from '../components/icons/Vite.astro';
+
+// Define tus tecnologías con sus nombres y el componente de icono correspondiente
+const technologies = [
+  // Lenguajes de Programación
+  { section: "Lenguajes", name: 'JavaScript', icon: JavaScript },
+  { section: "Lenguajes", name: 'Python', icon: Python },
+  { section: "Lenguajes", name: 'Java', icon: Java },
+  { section: "Lenguajes", name: 'PHP', icon: PHP },
+
+  // Frameworks Frontend
+  { section: "Frontend", name: 'React', icon: React },
+  { section: "Frontend", name: 'Vue.js', icon: Vue },
+  { section: "Frontend", name: 'Angular', icon: Angular },
+
+  // Frameworks Backend
+  { section: "Backend", name: 'Express.js', icon: Express },
+  { section: "Backend", name: 'Spring', icon: Spring },
+  { section: "Backend", name: 'FastAPI', icon: FastAPI },
+
+  // Bases de Datos
+  { section: "Bases de Datos", name: 'MySQL', icon: MySQL },
+  { section: "Bases de Datos", name: 'PostgreSQL', icon: PostgreSQL },
+  { section: "Bases de Datos", name: 'MongoDB', icon: MongoDB },
+  { section: "Bases de Datos", name: 'MariaDB', icon: MariaDB },
+
+  // DevOps y Cloud
+  { section: "DevOps y Cloud", name: 'Docker', icon: Docker },
+  { section: "DevOps y Cloud", name: 'Google Cloud', icon: GoogleCloud },
+
+  // CSS Frameworks
+  { section: "CSS", name: 'Tailwind', icon: Tailwind },
+  { section: "CSS", name: 'Bootstrap', icon: Bootstrap },
+
+  // Build Tools
+  { section: "Herramientas", name: 'Vite', icon: Vite },
+];
+---
+
+<div class="relative w-full max-w-4xl mx-auto my-8">
+  <div class="relative overflow-hidden p-4">
+    <div id="technologies-carousel-container" class="flex transition-transform duration-500 ease-in-out">
+      {technologies.map(tech => (
+        <div class="flex-none w-1/4 p-2">
+          <div class="flex flex-col items-center justify-center text-center bg-gray-200 dark:bg-gray-800 rounded-lg p-3 h-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+            <div class="w-12 h-12 flex items-center justify-center mb-2">
+              {tech.icon && <tech.icon class="text-gray-800 dark:text-gray-100 w-full h-full" />}
+            </div>
+            <p class="text-xs font-semibold text-gray-700 dark:text-gray-300">{tech.name}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('technologies-carousel-container');
+    if (!container) {
+      console.error('Carousel container not found.');
+      return;
+    }
+
+    const items = Array.from(container.children);
+    const itemsPerView = 4;
+    const totalItems = items.length;
+
+    // Clonar elementos para crear un bucle infinito
+    for (let i = 0; i < itemsPerView; i++) {
+      items.forEach(item => {
+        const clone = item.cloneNode(true);
+        container.appendChild(clone);
+      });
+    }
+
+    let currentPosition = 0;
+    const speed = 1.3; // Pixels per frame
+
+    const moveCarousel = () => {
+      currentPosition -= speed;
+      const itemWidth = container.offsetWidth / itemsPerView;
+
+      if (currentPosition <= -itemWidth * totalItems) {
+        currentPosition += itemWidth * totalItems;
+      }
+
+      container.style.transform = `translateX(${currentPosition}px)`;
+      requestAnimationFrame(moveCarousel);
+    };
+
+    // Iniciar el movimiento del carrusel
+    requestAnimationFrame(moveCarousel);
+
+    // Ajustar el carrusel cuando cambie el tamaño de la ventana
+    window.addEventListener('resize', () => {
+      const itemWidth = container.offsetWidth / itemsPerView;
+      currentPosition = -(currentPosition % (itemWidth * totalItems));
+      container.style.transform = `translateX(${currentPosition}px)`;
+    });
+  });
+</script>
+
+<style>
+  #technologies-carousel-container {
+    display: flex;
+    transition: none;
+  }
+  #technologies-carousel-container > div {
+    flex: 0 0 25%;
+  }
+
+  #technologies-carousel-container .w-12 svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
