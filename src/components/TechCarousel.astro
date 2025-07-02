@@ -1,0 +1,77 @@
+---
+const { technologies } = Astro.props;
+
+const extendedTechnologies = [...technologies, ...technologies, ...technologies];
+---
+
+<div class="tech-carousel-container">
+  <div class="tech-carousel-wrapper">
+    {extendedTechnologies.map((tech, index) => (
+      <div class="tech-carousel-slide" data-index={index}>
+        <div class="flex flex-col items-center justify-center text-center p-2">
+          <div class="w-8 h-8 flex items-center justify-center mb-1">
+            <tech.icon class="text-gray-800 dark:text-gray-100 w-full h-full" />
+          </div>
+          <p class="text-xs font-semibold text-gray-700 dark:text-gray-300">{tech.name}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tech-carousel-container {
+    overflow: hidden; /* Oculta lo que está fuera del contenedor */
+    width: 100%; /* O el ancho deseado */
+  }
+
+  .tech-carousel-wrapper {
+    display: flex; /* Para que las diapositivas se alineen horizontalmente */
+    /* Ancho total: el ancho de todas las diapositivas combinadas.
+       Esto será manejado por el contenido, pero asegura que sea muy amplio. */
+    width: fit-content; /* Se ajusta al contenido */
+    animation: scroll-left 30s linear infinite; /* Duración ajustable */
+    /* Ajusta la duración (30s) para controlar la velocidad.
+       'linear' es crucial para un movimiento constante.
+       'infinite' para que nunca pare. */
+  }
+
+  /* Pausar la animación al pasar el ratón por encima (opcional) */
+  .tech-carousel-wrapper:hover {
+    animation-play-state: paused;
+  }
+
+  .tech-carousel-slide {
+    flex-shrink: 0; /* Previene que las diapositivas se encojan */
+    /* Define un ancho fijo o mínimo para cada diapositiva.
+       Asegúrate de que haya suficiente espacio para tu contenido. */
+    min-width: 80px; /* Ejemplo: ajusta según el tamaño de tu icono y texto */
+    padding: 0 10px; /* Espaciado entre elementos */
+  }
+
+  /* Definición de la animación de desplazamiento */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%); /* Empieza sin desplazamiento */
+    }
+    100% {
+      /* Mueve el contenedor hacia la izquierda por el 50% de su ancho.
+         Si el contenido está duplicado una vez, moverlo el 50% hace que
+         el final de la primera copia coincida con el principio de la segunda.
+         Si lo duplicas más, ajusta este valor. */
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Media queries para ajustar el `min-width` o el `translateX` si es necesario */
+  @media (max-width: 640px) {
+    .tech-carousel-slide {
+      min-width: 60px; /* Más pequeño para móviles */
+    }
+    /* Podrías ajustar la animación aquí si el 50% no es suficiente por el cambio de min-width */
+    @keyframes scroll-left {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(calc(-100% / 3)); } /* Si duplicaste x3, ajusta al 1/3 del total */
+    }
+  }
+</style>

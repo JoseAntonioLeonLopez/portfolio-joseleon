@@ -1,32 +1,35 @@
 ---
-import Java from "../components/icons/Java.astro";
-import JavaScript from "../components/icons/JavaScript.astro";
-import TypeScript from "../components/icons/TypeScript.astro";
-import Python from "../components/icons/Python.astro";
-import PHP from "../components/icons/PHP.astro";
+import TechCarousel from "./TechCarousel.astro";
 
-import React from "../components/icons/React.astro";
-import Angular from "../components/icons/Angular.astro";
-import Vue from "../components/icons/Vue.astro";
+import Java from "./icons/Java.astro";
+import JavaScript from "./icons/JavaScript.astro";
+import TypeScript from "./icons/TypeScript.astro";
+import Python from "./icons/Python.astro";
+import PHP from "./icons/PHP.astro";
 
-import Spring from "../components/icons/Spring.astro";
-import Express from "../components/icons/Express.astro";
-import FastAPI from "../components/icons/FastAPI.astro";
+import React from "./icons/React.astro";
+import Angular from "./icons/Angular.astro";
+import Vue from "./icons/Vue.astro";
 
-import MySQL from "../components/icons/MySQL.astro";
-import MariaDB from "../components/icons/MariaDB.astro";
-import PostgreSQL from "../components/icons/PostgreSQL.astro";
-import MongoDB from "../components/icons/MongoDB.astro";
+import Spring from "./icons/Spring.astro";
+import Express from "./icons/Express.astro";
+import FastAPI from "./icons/FastAPI.astro";
 
-import Docker from "../components/icons/Docker.astro";
-import GoogleCloud from "../components/icons/GoogleCloud.astro";
+import MySQL from "./icons/MySQL.astro";
+import MariaDB from "./icons/MariaDB.astro";
+import PostgreSQL from "./icons/PostgreSQL.astro";
+import MongoDB from "./icons/MongoDB.astro";
 
-import CSS from "../components/icons/CSS.astro";
-import Tailwind from "../components/icons/Tailwind.astro";
-import Bootstrap from "../components/icons/Bootstrap.astro";
+import Docker from "./icons/Docker.astro";
+import GoogleCloud from "./icons/GoogleCloud.astro";
 
-import Vite from "../components/icons/Vite.astro";
-import NPM from "../components/icons/NPM.astro";
+import CSS from "./icons/CSS.astro";
+import Tailwind from "./icons/Tailwind.astro";
+import Bootstrap from "./icons/Bootstrap.astro";
+
+import Vite from "./icons/Vite.astro";
+import NPM from "./icons/NPM.astro";
+import Git from "./icons/Git.astro";
 
 // Define tus tecnologías con sus nombres y el componente de icono correspondiente
 const technologies = [
@@ -65,6 +68,7 @@ const technologies = [
   // Build Tools
   { section: "Herramientas", name: "Vite", icon: Vite },
   { section: "Herramientas", name: "NPM", icon: NPM },
+  { section: "Herramientas", name: "Git", icon: Git },
 ];
 
 // Definir el tipo para una tecnología
@@ -85,30 +89,9 @@ const technologiesBySection = technologies.reduce(
 );
 ---
 
+<!-- Carrusel de tecnologías -->
 <div class="relative w-full max-w-4xl mx-auto my-8">
-  <div class="relative overflow-hidden p-4">
-    <div
-      id="technologies-carousel-container"
-      class="flex transition-transform duration-500 ease-in-out"
-    >
-      {
-        technologies.map((tech) => (
-          <div class="flex-none w-1/4 p-2">
-            <div class="flex flex-col items-center justify-center text-center bg-gray-200 dark:bg-gray-800 rounded-lg p-3 h-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700">
-              <div class="w-12 h-12 flex items-center justify-center mb-2">
-                {tech.icon && (
-                  <tech.icon class="text-gray-800 dark:text-gray-100 w-full h-full" />
-                )}
-              </div>
-              <p class="text-xs font-semibold text-gray-700 dark:text-gray-300">
-                {tech.name}
-              </p>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </div>
+  <TechCarousel technologies={technologies} />
 </div>
 
 <!-- Listas de tecnologías por sección -->
@@ -135,73 +118,3 @@ const technologiesBySection = technologies.reduce(
     ))
   }
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById(
-      "technologies-carousel-container"
-    );
-    if (!container) {
-      console.error("Carousel container not found.");
-      return;
-    }
-
-    const items = Array.from(container.children);
-    const itemsPerView = 4;
-    const totalItems = items.length;
-
-    // Clonar elementos para crear un bucle infinito
-    for (let i = 0; i < itemsPerView; i++) {
-      items.forEach((item) => {
-        const clone = item.cloneNode(true);
-        container.appendChild(clone);
-      });
-    }
-
-    let currentPosition = 0;
-    const speed = 1.3; // Pixels per frame
-
-    const moveCarousel = () => {
-      currentPosition -= speed;
-      const itemWidth = container.offsetWidth / itemsPerView;
-
-      if (currentPosition <= -itemWidth * totalItems) {
-        currentPosition += itemWidth * totalItems;
-      }
-
-      container.style.transform = `translateX(${currentPosition}px)`;
-      requestAnimationFrame(moveCarousel);
-    };
-
-    // Iniciar el movimiento del carrusel
-    requestAnimationFrame(moveCarousel);
-
-    // Ajustar el carrusel cuando cambie el tamaño de la ventana
-    window.addEventListener("resize", () => {
-      const itemWidth = container.offsetWidth / itemsPerView;
-      currentPosition = -(currentPosition % (itemWidth * totalItems));
-      container.style.transform = `translateX(${currentPosition}px)`;
-    });
-  });
-</script>
-
-<style>
-  #technologies-carousel-container {
-    display: flex;
-    transition: none;
-  }
-  #technologies-carousel-container > div {
-    flex: 0 0 25%;
-  }
-
-  #technologies-carousel-container .w-12 svg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .w-4 svg {
-    width: 100%;
-    height: 100%;
-  }
-</style>
