@@ -6,4 +6,8 @@ import robotsTxt from "astro-robots-txt"
 export default defineConfig({
   integrations: [tailwind(), robotsTxt()],
   site: 'https://JoseAntonioLeonLopez.github.io',
+  base: '/portfolio-joseleon', // Mantenemos el 'base' para rutas relativas al subdirectorio
+  build: {
+    assetsPrefix: './', // Esto fuerza a Astro a usar rutas relativas para los assets
+  }
 })
