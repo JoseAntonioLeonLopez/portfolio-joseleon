@@ -1,5 +1,6 @@
 ---
 import TechCarousel from "./TechCarousel.astro";
+import ExperienceRating from './ExperienceRating.astro';
 
 import Java from "./icons/Java.astro";
 import JavaScript from "./icons/JavaScript.astro";
@@ -27,54 +28,55 @@ import CSS from "./icons/CSS.astro";
 import Tailwind from "./icons/Tailwind.astro";
 import Bootstrap from "./icons/Bootstrap.astro";
 
-import Vite from "./icons/Vite.astro";
-import NPM from "./icons/NPM.astro";
 import Git from "./icons/Git.astro";
+import NPM from "./icons/NPM.astro";
+import Vite from "./icons/Vite.astro";
 
 // Define tus tecnologías con sus nombres y el componente de icono correspondiente
 const technologies = [
   // Lenguajes de Programación
-  { section: "Lenguajes", name: "Java", icon: Java },
-  { section: "Lenguajes", name: "JavaScript", icon: JavaScript },
-  { section: "Lenguajes", name: "TypeScript", icon: TypeScript },
-  { section: "Lenguajes", name: "Python", icon: Python },
-  { section: "Lenguajes", name: "PHP", icon: PHP },
+  { section: "Lenguajes", name: "Java", experience: 3, icon: Java },
+  { section: "Lenguajes", name: "JavaScript", experience: 3, icon: JavaScript },
+  { section: "Lenguajes", name: "TypeScript", experience: 3, icon: TypeScript },
+  { section: "Lenguajes", name: "Python", experience: 2, icon: Python },
+  { section: "Lenguajes", name: "PHP", experience: 2, icon: PHP },
 
   // Frameworks Frontend
-  { section: "Frontend", name: "React", icon: React },
-  { section: "Frontend", name: "Angular", icon: Angular },
-  { section: "Frontend", name: "Vue.js", icon: Vue },
+  { section: "Frontend", name: "React", experience: 3, icon: React },
+  { section: "Frontend", name: "Angular", experience: 3, icon: Angular },
+  { section: "Frontend", name: "Vue.js", experience: 1, icon: Vue },
 
   // Frameworks Backend
-  { section: "Backend", name: "Spring", icon: Spring },
-  { section: "Backend", name: "Express.js", icon: Express },
-  { section: "Backend", name: "FastAPI", icon: FastAPI },
+  { section: "Backend", name: "Spring", experience: 3, icon: Spring },
+  { section: "Backend", name: "Express.js", experience: 3, icon: Express },
+  { section: "Backend", name: "FastAPI", experience: 3, icon: FastAPI },
 
   // Bases de Datos
-  { section: "Bases de Datos", name: "MySQL", icon: MySQL },
-  { section: "Bases de Datos", name: "MariaDB", icon: MariaDB },
-  { section: "Bases de Datos", name: "PostgreSQL", icon: PostgreSQL },
-  { section: "Bases de Datos", name: "MongoDB", icon: MongoDB },
+  { section: "Bases de Datos", name: "MySQL", experience: 4, icon: MySQL },
+  { section: "Bases de Datos", name: "MariaDB", experience: 4, icon: MariaDB },
+  { section: "Bases de Datos", name: "PostgreSQL", experience: 2, icon: PostgreSQL },
+  { section: "Bases de Datos", name: "MongoDB", experience: 1, icon: MongoDB },
 
   // DevOps y Cloud
-  { section: "DevOps y Cloud", name: "Docker", icon: Docker },
-  { section: "DevOps y Cloud", name: "Google Cloud", icon: GoogleCloud },
+  { section: "DevOps y Cloud", name: "Docker", experience: 4, icon: Docker },
+  { section: "DevOps y Cloud", name: "Google Cloud", experience: 1, icon: GoogleCloud },
 
   // CSS Frameworks
-  { section: "CSS", name: "CSS", icon: CSS },
-  { section: "CSS", name: "Tailwind", icon: Tailwind },
-  { section: "CSS", name: "Bootstrap", icon: Bootstrap },
+  { section: "CSS", name: "CSS", experience: 4, icon: CSS },
+  { section: "CSS", name: "Tailwind", experience: 3, icon: Tailwind },
+  { section: "CSS", name: "Bootstrap", experience: 2, icon: Bootstrap },
 
   // Build Tools
-  { section: "Herramientas", name: "Vite", icon: Vite },
-  { section: "Herramientas", name: "NPM", icon: NPM },
-  { section: "Herramientas", name: "Git", icon: Git },
+  { section: "Herramientas", name: "Git", experience: 4, icon: Git },
+  { section: "Herramientas", name: "NPM", experience: 3, icon: NPM },
+  { section: "Herramientas", name: "Vite", experience: 2, icon: Vite },
 ];
 
 // Definir el tipo para una tecnología
 type Technology = {
   section: string;
   name: string;
+  experience: number;
   icon: any;
 };
 
@@ -103,13 +105,16 @@ const technologiesBySection = technologies.reduce(
       </h3>
       <ul class="space-y-2">
         {techs.map((tech: Technology) => (
-          <li class="flex items-center space-x-3">
-            <div class="icon-wrapper">
-              <tech.icon />
+          <li class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="icon-wrapper">
+                <tech.icon />
+              </div>
+              <span class="text-sm text-gray-700 dark:text-gray-300">
+                {tech.name}
+              </span>
             </div>
-            <span class="text-sm text-gray-700 dark:text-gray-300">
-              {tech.name}
-            </span>
+            <ExperienceRating experience={tech.experience} />
           </li>
         ))}
       </ul>

@@ -1,0 +1,17 @@
+---
+export interface Props {
+  experience: number;
+}
+
+const { experience } = Astro.props;
+const maxRating = 5;
+---
+
+<div class="flex items-center space-x-2">
+  <span class="text-xs text-gray-500 dark:text-gray-400">Exp:</span>
+  <div class="flex items-center">
+    {Array.from({ length: maxRating }).map((_, index) => (
+      <span class={`w-2 h-2 rounded-full mx-0.5 ${index < experience ? 'bg-yellow-400' : 'bg-gray-300'}`}></span>
+    ))}
+  </div>
+</div>
