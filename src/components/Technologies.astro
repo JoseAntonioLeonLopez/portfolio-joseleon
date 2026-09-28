@@ -10,12 +10,12 @@ import PHP from "./icons/PHP.astro";
 
 import React from "./icons/React.astro";
 import Angular from "./icons/Angular.astro";
-import Vue from "./icons/Vue.astro";
 
 import Spring from "./icons/Spring.astro";
 import Express from "./icons/Express.astro";
 import FastAPI from "./icons/FastAPI.astro";
 
+import OracleDatabase from "./icons/OracleDatabase.astro";
 import MySQL from "./icons/MySQL.astro";
 import MariaDB from "./icons/MariaDB.astro";
 import PostgreSQL from "./icons/PostgreSQL.astro";
@@ -24,6 +24,7 @@ import MongoDB from "./icons/MongoDB.astro";
 import Docker from "./icons/Docker.astro";
 import GoogleCloud from "./icons/GoogleCloud.astro";
 
+import HTML5 from "./icons/HTML5.astro";
 import CSS from "./icons/CSS.astro";
 import Tailwind from "./icons/Tailwind.astro";
 import Bootstrap from "./icons/Bootstrap.astro";
@@ -35,33 +36,34 @@ import Vite from "./icons/Vite.astro";
 // Define tus tecnologías con sus nombres y el componente de icono correspondiente
 const technologies = [
   // Lenguajes de Programación
-  { section: "Lenguajes", name: "Java", experience: 3, icon: Java },
-  { section: "Lenguajes", name: "JavaScript", experience: 3, icon: JavaScript },
+  { section: "Lenguajes", name: "Java", experience: 4, icon: Java },
   { section: "Lenguajes", name: "TypeScript", experience: 3, icon: TypeScript },
-  { section: "Lenguajes", name: "Python", experience: 2, icon: Python },
+  { section: "Lenguajes", name: "JavaScript", experience: 4, icon: JavaScript },
+  { section: "Lenguajes", name: "Python", experience: 3, icon: Python },
   { section: "Lenguajes", name: "PHP", experience: 2, icon: PHP },
+
+  // Backend & Arquitectura
+  { section: "Backend", name: "Spring Boot", experience: 4, icon: Spring },
+  { section: "Backend", name: "Express.js", experience: 3, icon: Express },
+  { section: "Backend", name: "FastAPI", experience: 3, icon: FastAPI },
 
   // Frameworks Frontend
   { section: "Frontend", name: "React", experience: 3, icon: React },
   { section: "Frontend", name: "Angular", experience: 3, icon: Angular },
-  { section: "Frontend", name: "Vue.js", experience: 1, icon: Vue },
-
-  // Frameworks Backend
-  { section: "Backend", name: "Spring", experience: 3, icon: Spring },
-  { section: "Backend", name: "Express.js", experience: 3, icon: Express },
-  { section: "Backend", name: "FastAPI", experience: 3, icon: FastAPI },
 
   // Bases de Datos
+  { section: "Bases de Datos", name: "Oracle Database", experience: 3, icon: OracleDatabase },
   { section: "Bases de Datos", name: "MySQL", experience: 4, icon: MySQL },
   { section: "Bases de Datos", name: "MariaDB", experience: 4, icon: MariaDB },
   { section: "Bases de Datos", name: "PostgreSQL", experience: 2, icon: PostgreSQL },
-  { section: "Bases de Datos", name: "MongoDB", experience: 1, icon: MongoDB },
+  { section: "Bases de Datos", name: "MongoDB", experience: 3, icon: MongoDB },
 
   // DevOps y Cloud
   { section: "DevOps y Cloud", name: "Docker", experience: 4, icon: Docker },
-  { section: "DevOps y Cloud", name: "Google Cloud", experience: 1, icon: GoogleCloud },
+  { section: "DevOps y Cloud", name: "Google Cloud", experience: 3, icon: GoogleCloud },
 
   // CSS Frameworks
+  { section: "CSS", name: "HTML5", experience: 4, icon: HTML5 },
   { section: "CSS", name: "CSS", experience: 4, icon: CSS },
   { section: "CSS", name: "Tailwind", experience: 3, icon: Tailwind },
   { section: "CSS", name: "Bootstrap", experience: 2, icon: Bootstrap },
@@ -69,8 +71,17 @@ const technologies = [
   // Build Tools
   { section: "Herramientas", name: "Git", experience: 4, icon: Git },
   { section: "Herramientas", name: "NPM", experience: 3, icon: NPM },
-  { section: "Herramientas", name: "Vite", experience: 2, icon: Vite },
+  { section: "Herramientas", name: "Vite", experience: 3, icon: Vite },
 ];
+
+// Otras habilidades relevantes sin icono propio, agrupadas por categoría
+const otherSkills: Record<string, string[]> = {
+  "Seguridad & Arquitectura": ["Spring Security", "Spring Cloud", "OAuth2 / JWT", "Microservices", "REST APIs", "Design Patterns", "Clean Code"],
+  "Frontend avanzado": ["Zustand", "TanStack", "Zod"],
+  "Testing & Calidad": ["JUnit", "Mockito", "SonarQube", "ESLint"],
+  "IA & Automatización": ["APIs de LLM", "Prompt Engineering", "Automatización de procesos con IA"],
+  "Metodologías & Liderazgo": ["Scrum", "Agile", "CI/CD", "Mentoring técnico", "Code Review"],
+};
 
 // Definir el tipo para una tecnología
 type Technology = {
@@ -120,6 +131,26 @@ const technologiesBySection = technologies.reduce(
       </ul>
     </div>
   ))}
+</div>
+
+<!-- Otras habilidades y metodologías -->
+<div class="mt-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {Object.entries(otherSkills).map(([category, skills]) => (
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow-md">
+        <h3 class="text-lg font-bold mb-3 text-gray-800 dark:text-gray-200">
+          {category}
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-500/10 dark:text-yellow-200">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
 </div>
 
 <style>

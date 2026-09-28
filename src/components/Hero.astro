@@ -2,6 +2,7 @@
 const personalImageAlt = "José Antonio León López";
 import Badge from "@/components/Badge.astro";
 import LinkedInIcon from "@/components/icons/LinkedIn.astro";
+import GitHubIcon from "@/components/icons/GitHub.astro";
 import MailIcon from "@/components/icons/Mail.astro";
 import SocialPill from "@/components/SocialPill.astro";
 ---
@@ -19,7 +20,7 @@ import SocialPill from "@/components/SocialPill.astro";
       rel="noopener"
       class="flex items-center transition md:justify-center md:hover:scale-105"
     >
-      <Badge>Escuchando ofertas</Badge>
+      <Badge>Abierto a nuevas oportunidades</Badge>
     </a>
   </div>
   <h1
@@ -30,11 +31,11 @@ import SocialPill from "@/components/SocialPill.astro";
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
-    +2 años de experiencia. <strong
-      >Desarrollador de Software Full Stack especializado en integración de IA y
-      desarrollo web moderno</strong
-    > de Sevilla, España 🇪🇸. Apasionado por crear aplicaciones innovadoras que aprovechan
-    el poder de la inteligencia artificial para ofrecer soluciones eficientes y personalizadas.
+    +3 años de experiencia. <strong
+      >Full-Stack Software Engineer especializado en Java, Spring Boot y React,
+      con experiencia integrando soluciones de Inteligencia Artificial</strong
+    > en Sevilla, España 🇪🇸. Diseño microservicios escalables y seguros, e interfaces
+    de alto rendimiento, aportando resultados medibles en entornos Agile/Scrum.
   </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="mailto:joseantonioleonlopez206@gmail.com">
@@ -44,6 +45,10 @@ import SocialPill from "@/components/SocialPill.astro";
     <SocialPill href="https://www.linkedin.com/in/jose-antonio-leon-lopez/">
       <LinkedInIcon class="size-4" />
       LinkedIn
+    </SocialPill>
+    <SocialPill href="https://github.com/JoseAntonioLeonLopez">
+      <GitHubIcon class="size-4" />
+      GitHub
     </SocialPill>
   </nav>
 </div>
